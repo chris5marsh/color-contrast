@@ -56,7 +56,7 @@ app.get(['/:f/:b/:l', '/:f/:b'], async (req,res) => {
       options.label = response.data[l];
       options.message = response.data.ratio;
       options.isError = response.data[l] !== 'pass';
-      options.color = 'green';
+      options.color = options.isError === false ? 'green' : 'red';
     }
     return makeResponse(options);
   });
