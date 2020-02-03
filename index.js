@@ -31,6 +31,10 @@ const makeResponse = (opts) => {
   };
 };
 
+app.get('/', (req,res) => {
+  return res.send({ 'foo': 'bar' })
+});
+
 app.get(['/:f/:b/:l', '/:f/:b'], async (req,res) => {
 
   const fColor = color(req.params.f);
@@ -46,7 +50,6 @@ app.get(['/:f/:b/:l', '/:f/:b'], async (req,res) => {
       isError: true
     }
     if (response.status === 200) {
-      console.log(response.data[l] !== 'pass');
       options.label = response.data[l];
       options.message = response.data.ratio;
       options.isError = response.data[l] !== 'pass';
