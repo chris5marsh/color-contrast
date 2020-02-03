@@ -13,12 +13,14 @@ const makeResponse = (opts) => {
   if (!opts.label) return false;
   if (!opts.message) return false;
   if (opts.isError !== true && opts.isError !== false) return false;
+  if (!opts.color) return false;
 
   return {
     schemaVersion: 1,
     label: opts.label,
     message: opts.message,
-    isError: opts.isError
+    isError: opts.isError,
+    color: opts.color
     // color
     // labelColor
     // namedLogo
@@ -47,12 +49,14 @@ app.get(['/:f/:b/:l', '/:f/:b'], async (req,res) => {
     const options = {
       label: 'Error',
       message: 'n/a',
-      isError: true
+      isError: true,
+      color: 'red'
     }
     if (response.status === 200) {
       options.label = response.data[l];
       options.message = response.data.ratio;
       options.isError = response.data[l] !== 'pass';
+      options.color = 'green';
     }
     return makeResponse(options);
   });
