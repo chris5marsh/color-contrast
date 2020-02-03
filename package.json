@@ -1,0 +1,20 @@
+{
+  "name": "color-contrast",
+  "version": "1.0.0",
+  "description": "An API to link shields.io to WebAIM",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js",
+    "dev": "DEBUG=* npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.19.2",
+    "color": "^3.1.2",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}
