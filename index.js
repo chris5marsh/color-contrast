@@ -12,12 +12,13 @@ const webaimUrl = (f, b) => `https://webaim.org/resources/contrastchecker/?fcolo
 const makeResponse = (opts) => {
   if (!opts.label) return false;
   if (!opts.message) return false;
+  if (opts.isError !== true && opts.isError !== false) return false;
 
   return {
     schemaVersion: 1,
     label: opts.label,
     message: opts.message,
-    isError: opts.isError || true,
+    isError: opts.isError
     // color
     // labelColor
     // namedLogo
@@ -28,14 +29,6 @@ const makeResponse = (opts) => {
     // style: 'flat',
     // cacheSeconds: 300
   };
-};
-
-const doesItPass = (ratio, level) => {
-  if (level === 'AA') {
-    return parseFloat(ratio) > 4.5;
-  } else if (level === 'AAA') {
-    return parseFloat(ratio) > 7;
-  }
 };
 
 app.get(['/:f/:b/:l', '/:f/:b'], async (req,res) => {
@@ -53,9 +46,10 @@ app.get(['/:f/:b/:l', '/:f/:b'], async (req,res) => {
       isError: true
     }
     if (response.status === 200) {
+      console.log(response.data[l] !== 'pass');
       options.label = response.data[l];
       options.message = response.data.ratio;
-      options.isError = doesItPass(response.data.ratio, l);
+      options.isError = response.data[l] !== 'pass';
     }
     return makeResponse(options);
   });
