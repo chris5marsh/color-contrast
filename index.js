@@ -41,8 +41,9 @@ app.get(['/:f/:b/:l', '/:f/:b'], async (req,res) => {
 
   const fColor = color(req.params.f);
   const bColor = color(req.params.b);
-  const fHex = encodeURIComponent(fColor.hex());
-  const bHex = encodeURIComponent(bColor.hex());
+  const fHex = fColor.hex().replace('#', '');
+  const bHex = bColor.hex().replace('#', '');
+  console.log(fColor, fHex, bColor, bHex);
   const l = req.params.l || 'AA';
   const endpoint = webaimUrl(fHex, bHex);
   const response = await axios.get(endpoint).then((response) => {
