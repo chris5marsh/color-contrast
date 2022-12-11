@@ -14,7 +14,7 @@
     "axios": "^0.19.2",
     "color": "^3.1.2",
     "debug": "^4.1.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "nodemon": "^2.0.2"
   },
   "engines": {
